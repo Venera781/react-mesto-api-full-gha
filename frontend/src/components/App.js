@@ -16,7 +16,6 @@ import Register from "./Register";
 import Login from "./Login";
 import ProtectedRoute from "./ProtectedRoute";
 import * as token from "../utils/token";
-import * as auth from "../auth";
 import PopupFailedRegistration from "./PopupFailedRegistration";
 import PopupSuccessRegistration from "./PopupSuccessRegistration";
 import PathName from "../utils/PathNames";
@@ -125,8 +124,7 @@ function App() {
   const handleClose = () => {
     setPopup(PopupType.noPopup);
   };
-  
-  
+
   const handleAddPlaceSubmit = (placename, link) => {
     api
       .addCard(placename, link)
@@ -175,12 +173,13 @@ function App() {
 
     setUserState(StateUser.checking);
 
-    auth.getUserData(token.getToken())
+    api
+      .getInfoUser()
       .then((userData) => {
-        setCurrentUser({
-          ...noUser,
-          email: userData.data.email,
-        });
+        setCurrentUser((old) => ({
+          ...old,
+          ...userData,
+        }));
         setUserState(StateUser.loggedIn);
       })
       .catch((e) => {
@@ -188,17 +187,17 @@ function App() {
         setUserState(StateUser.error);
       });
   }, [userState]);
-  
+
   useEffect(() => {
     if (userState !== StateUser.loggedIn || cards !== noCards) {
       return;
     }
 
-    Promise.all([api.getInfoUser(), api.getInitialCards()])
-      .then(([info, cardsData]) => {
+    Promise.all([api.getInitialCards(), api.getInfoUser()])
+      .then(([cardsData, userData]) => {
         setCurrentUser((old) => ({
           ...old,
-          ...info,
+          ...userData,
         }));
         cardsData.reverse();
         setCards(cardsData);
@@ -209,17 +208,13 @@ function App() {
   }, [userState, cards]);
 
   const handleLogin = ({ email, password }, onSuccess, onError) => {
-    auth
+    api
       .authorize(email, password)
       .then((res) => {
         if (!res.token) {
           throw new Error("Нет токена");
         }
         token.setToken(res.token);
-        setCurrentUser({
-          ...noUser,
-          email,
-        });
         setUserState(StateUser.loggedIn);
         onSuccess();
       })
@@ -229,7 +224,7 @@ function App() {
       });
   };
   const handleRegister = ({ email, password }, onSuccess, onError) => {
-    auth
+    api
       .register(email, password)
       .then(() => {
         setPopup("success");

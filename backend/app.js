@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import routes from './routes/index.js';
 import { errors } from 'celebrate';
 import checkErrors from './errors/checkErrors.js';
@@ -11,6 +12,7 @@ const { PORT = 3000 } = process.env;
 await mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 console.log('MongoDB connected');
 
+app.use(cors());
 app.use(requestLogger); // подключаем логгер запросов
 app.use(express.json());
 app.use(routes);

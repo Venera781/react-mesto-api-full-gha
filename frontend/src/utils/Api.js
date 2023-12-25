@@ -1,18 +1,33 @@
+import {getToken} from "./token";
+
 class Api {
-  constructor({ baseUrl, headers }) {
-    this._baseUrl = baseUrl;
-    this._headers = headers;
+  constructor() {
+    this._baseUrl =
+      process.env.NODE_ENV === "production"
+        ? process.env.BACKEND_URL
+        : "http://127.0.0.1:3000";
+  }
+
+  static _getHeaders(needAuth = true) {
+    const rv = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    if (needAuth) {
+      rv.Authorization = `Bearer ${getToken()}`;
+    }
+    return rv;
   }
 
   _getData(path) {
     return fetch(`${this._baseUrl}/${path}`, {
       method: "GET",
-      headers: this._headers,
+      headers: Api._getHeaders(),
     }).then((res) => {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return Promise.reject(res);
     });
   }
 
@@ -38,16 +53,16 @@ class Api {
     };
   };
 
-  _sendData(path, method, body) {
+  _sendData(path, method, body, needAuth = true) {
     return fetch(`${this._baseUrl}/${path}`, {
       method: method,
-      headers: this._headers,
+      headers: Api._getHeaders(needAuth),
       body: body ? JSON.stringify(body) : undefined,
     }).then((res) => {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return Promise.reject(res);
     });
   }
 
@@ -69,10 +84,11 @@ class Api {
   }
 
   //заменить аватар (PATCH)
-  updateAvatar(avatar) {
-    return this._sendData("users/me/avatar", "PATCH", { avatar: avatar }).then(
-      this._normalizeUser
-    );
+  async updateAvatar(avatar) {
+    const data = await this._sendData("users/me/avatar", "PATCH", {
+      avatar: avatar,
+    });
+    return this._normalizeUser(data);
   }
 
   //Ставить/удалить лайк карточки (DELETE)
@@ -82,17 +98,16 @@ class Api {
     }
     return this._sendData(`cards/${id}/likes`, "PUT");
   }
+
+  register(email, password) {
+    return this._sendData("signup", "POST", { email, password }, false);
+  }
+
+  authorize(email, password) {
+    return this._sendData("signin", "POST", { email, password }, false);
+  }
 }
 
-const optionsApi = {
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-75",
-  headers: {
-    authorization: "bf52e809-820b-4544-9ff1-1e4a5136ff57",
-    "Content-Type": "application/json",
-  },
-};
-
-//1.Загрузка первоначальных карточек с сервера
-const api = new Api(optionsApi);
+const api = new Api();
 
 export default api;

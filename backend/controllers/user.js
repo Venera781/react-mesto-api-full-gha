@@ -95,12 +95,7 @@ export const login = async (req, res, next) => {
     });
     res
       .status(StatusCodes.OK)
-      .cookie('jwt', token, {
-        maxAge: 7 * 24 * 3600 * 1000,
-        httpOnly: true,
-        sameSite: true,
-      })
-      .send({token});
+      .send({ token });
   } catch (err) {
     next(err);
   }
