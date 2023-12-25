@@ -1,0 +1,8 @@
+.element__wrapper-like {
+    display: flex;
+    flex-direction: column;
+    min-width: 22px;
+    min-height: 35px;
+    margin-right: 21px;
+    align-items: center;
+}

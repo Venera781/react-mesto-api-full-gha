@@ -1,0 +1,14 @@
+.element__title {
+    display: block;
+    width: 70%;
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: 900;
+    color: inherit;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 21px;
+    background-repeat: no-repeat;
+}

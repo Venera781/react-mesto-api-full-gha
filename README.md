@@ -5,12 +5,13 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-Адрес репозитория: https://github.com/...
+Адрес репозитория: https://github.com/Venera781/react-mesto-api-full-gha
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP 158.160.135.139
 
-Frontend https://...
+Frontend https://mv781mestofront.nomoredomainsmonster.ru
 
-Backend https://...
+Backend https://api.mv781mestofront.nomoredomainsmonster.ru
+

@@ -1,0 +1,23 @@
+.page__content {
+    display: flex;
+    flex-direction: column;
+    width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (max-width: 927px) {
+    .page__content {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .page__content {
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

@@ -1,0 +1,10 @@
+.element__wrapper-title {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background-color: white;
+    border-radius: 0 0 10px 10px;
+}

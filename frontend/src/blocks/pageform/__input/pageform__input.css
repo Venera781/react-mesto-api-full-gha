@@ -1,0 +1,21 @@
+.pageform__input {
+  color: white;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border-bottom: 2px solid rgba(204, 204, 204, 1);
+  padding: 13px 8px;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.pageform__input:focus {
+  outline: none;
+} 
+
+@media screen and (max-width: 624px) {
+  .pageform__input {
+    width: 260px;
+    margin-top: 0;
+  }
+}

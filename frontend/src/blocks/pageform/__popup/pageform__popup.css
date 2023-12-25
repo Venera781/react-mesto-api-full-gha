@@ -1,0 +1,12 @@
+.pageform__popup{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding-top: 50px;
+    padding-left: 36px;
+    padding-bottom: 60px;
+    padding-right: 36px;
+    z-index: 0;
+}

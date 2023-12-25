@@ -1,0 +1,14 @@
+.pageform__heading {
+    color: white;
+    margin: 0 0 50px;
+    text-align: center;
+    
+}
+
+@media screen and (max-width: 624px) {
+    .pageform__heading {
+        font-size: 20px;
+        line-height: 22px;
+        margin-bottom: 40px; 
+    }
+}

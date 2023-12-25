@@ -1,0 +1,23 @@
+.profile__avatar-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.profile__avatar-wrapper:hover::before {
+  position: absolute;
+  content: " ";
+  display: block;
+  flex-shrink: 0;
+  margin-right: 0px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-image: url(../../../images/Big_pen.svg);
+  background-repeat: no-repeat;
+  background-size: 26px 26px;
+  background-position: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}

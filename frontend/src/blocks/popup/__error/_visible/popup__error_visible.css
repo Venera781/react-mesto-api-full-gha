@@ -1,0 +1,5 @@
+.popup__error_visible {
+    display: flex;
+    visibility: visible;
+    min-height: 30px;
+}
