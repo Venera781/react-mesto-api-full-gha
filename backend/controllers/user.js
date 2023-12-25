@@ -3,7 +3,7 @@ import NotFoundError from '../errors/NotFoundError.js';
 import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { JWT_EXPIRES, JWT_SECRET } from '../constants/jwt.js';
+import { JWT_EXPIRES, JWT_SECRET } from '../constants/index.js';
 import BadRequestError from '../errors/BadRequestError.js';
 
 //GET /users — возвращает всех пользователей

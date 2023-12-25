@@ -1,6 +1,6 @@
 import UnauthorizedError from '../errors/UnauthorizedError.js';
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from '../constants/jwt.js';
+import { JWT_SECRET } from '../constants/index.js';
 
 export const auth = async (req, res, next) => {
   const { authorization } = req.headers;
