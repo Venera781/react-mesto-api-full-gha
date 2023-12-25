@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(routes);
 app.use(errorLogger); // подключаем логгер ошибок
 
-app.use(errors({ statusCode: 400 }));
+app.use(errors());
 app.use((err, req, res, next) => {
   checkErrors(err, res, next);
 });
